@@ -11,7 +11,7 @@
 #define __CONFIG_ZYNQ_MICROZED_H
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
-	"bootargs=console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait \0" \
+	"bootargs=console=ttyPS1,115200 root=/dev/mmcblk0p2 rw rootwait \0" \
 	"ethaddr=00:0a:35:00:01:22\0" \
 	"fdt_high=0x20000000\0"	\
 	"devicetree_image=devicetree.dtb\0" \
