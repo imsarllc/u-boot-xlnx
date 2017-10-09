@@ -30,12 +30,13 @@
 	"fdt_high=0x20000000\0"	\
 	"fpga_buff=0x0100000\0" \
 	"fpga_offset=0x100000\0" \
-	"grizzlyboot=qspiboot sdboot\0" \
+	"grizzlyboot=qspiboot reset_qspi_addr sdboot\0" \
 	"kernel_image=uImage\0" \
-	"read_fpga=echo Loading FPGA from QSPI && sf probe 0 0 0 && sf read ${fpga_buff} ${fpga_offset} ${bitsz}\0" \
 	"load_bit=echo Loading bit file && fpga loadb 0 ${fpga_buff} ${bitsz}\0" \
 	"qspiboot=run read_fpga && run load_bit || " \
 		"echo FPGA load failed && setenv devicetree_image fallback.dtb\0" \
+	"read_fpga=echo Loading FPGA from QSPI && sf probe 0 0 0 && sf read ${fpga_buff} ${fpga_offset} ${bitsz}\0" \
+	"reset_qspi_addr=sf probe 0 0 0 && sf read 0x0100000 0x100000 1" \
 	"sdboot=echo Copying Linux from SD to RAM... && " \
 		"mmcinfo && " \
 		"fatload mmc 0 0x3000000 ${kernel_image} && " \
