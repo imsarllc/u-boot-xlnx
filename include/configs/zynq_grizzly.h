@@ -16,7 +16,7 @@
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	"bitsz=0x0109C0F6\0" \
-	"bootargs=console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprintk\0" \
+	"bootargs=console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprintk mem=512M\0" \
 	"clear=sf probe 0 && sf erase 80000 20000\0" \
 	"devicetree_image=devicetree.dtb\0" \
 	"ethaddr=00:0a:35:00:01:22\0" \
