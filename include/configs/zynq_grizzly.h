@@ -18,22 +18,22 @@
 	"bitsz=0x0109C0F6\0" \
 	"bootargs=console=ttyPS0,115200 root=/dev/mmcblk0p2 rw rootwait earlyprintk mem=512M\0" \
 	"clear=sf probe 0 && sf erase 80000 20000\0" \
-	"devicetree_image=devicetree.dtb\0" \
+	"dtb=devicetree.dtb\0" \
 	"ethaddr=00:0a:35:00:01:22\0" \
 	"fdt_high=0x20000000\0"	\
 	"fpga_buff=0x0100000\0" \
 	"fpga_offset=0x100000\0" \
 	"grizzlyboot=qspiboot reset_qspi_addr sdboot\0" \
-	"kernel_image=uImage\0" \
+	"kernel=uImage\0" \
 	"load_bit=echo Loading bit file && fpga loadb 0 ${fpga_buff} ${bitsz}\0" \
 	"qspiboot=run read_fpga && run load_bit || " \
-		"echo FPGA load failed && setenv devicetree_image fallback.dtb\0" \
+		"echo FPGA load failed && setenv dtb fallback.dtb\0" \
 	"read_fpga=echo Loading FPGA from QSPI && sf probe 0 0 0 && sf read ${fpga_buff} ${fpga_offset} ${bitsz}\0" \
 	"reset_qspi_addr=sf probe 0 0 0 && sf read 0x0100000 0x100000 1\0" \
 	"sdboot=echo Copying Linux from SD to RAM... && " \
 		"mmcinfo && " \
-		"fatload mmc 0 0x3000000 ${kernel_image} && " \
-		"fatload mmc 0 0x2A00000 ${devicetree_image} && " \
+		"fatload mmc 0 0x3000000 ${kernel} && " \
+		"fatload mmc 0 0x2A00000 ${dtb} && " \
 		"bootm 0x3000000 - 0x2A00000\0"
 
 #include <configs/zynq-common.h>
